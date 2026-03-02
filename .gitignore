@@ -1,0 +1,7 @@
+include/
+lib/
+bin/
+*.exe
+*.o
+*.wav
+*.flac
