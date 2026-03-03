@@ -84,17 +84,23 @@ void process_flac_file(FILE *fp) {
     // Pull out the metadata block containing the thumbnail if it exists.
     
     int i = 0;
+    int mask = 0x7F;
     int data = 0;
     printf("BEGIN\n");
-    while (i < 4) {
+    while (1) {
         data = fgetc(fp);
         if (data == EOF) {
             break;
         }
-        printf("%x ", data);
+        if (data ==  134 || data == 6) {
+            printf("AAAAAAAAAAGHHHHHHHHHHHHHHHHHHHH!\n %d", i);
+            break;
+        }
+        printf("%d ", data & mask);
         i++;
     }
     printf("\nEND HEADER\n");
+    printf("%d", 0b10000110 & mask);
 
     return;
 }
